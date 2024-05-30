@@ -73,5 +73,5 @@ jobs:
             curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
             docker login -u ${{ vars.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             sh install-scout.sh
-            docker scout cves --exit-code --only-severity critical,high zad1:latest
+            docker scout cves --exit-code --only-severity critical,high zadanie2:zadanie2
             echo "SCAN_RESULT=$?" >> "$GITHUB_ENV"
