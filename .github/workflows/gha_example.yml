@@ -1,0 +1,77 @@
+name: GHAction example  
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+    - 'v*'
+
+jobs:
+  ci_step:
+    name: Build, tag and push Docker image to DockerHub
+    runs-on: ubuntu-latest
+      
+    steps:
+      - 
+        name: Check out the source_repo
+        uses: actions/checkout@v4
+      
+      -
+        name: Docker metadata definitions
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ vars.DOCKERHUB_USERNAME }}/example
+          flavor: latest=false
+          tags: |
+            type=sha,priority=100,prefix=sha-,format=short
+            type=semver,priority=200,pattern={{version}}   
+
+      - 
+        name: QEMU set-up
+        uses: docker/setup-qemu-action@v3
+
+      - 
+        name: Buildx set-up
+        uses: docker/setup-buildx-action@v3
+
+      - 
+        name: Authenticate do Docker
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        id: build-and-push
+        uses: docker/build-push-action@v4.0.0
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      
+      # - name: Docker Scout
+      #   id: docker-scout
+      #   if: ${{ github.event_name == 'pull_request' }}
+      #   uses: docker/scout-action@v1
+      #   with:
+      #     command: compare
+      #     image: ${{ steps.meta.outputs.tags }}
+      #     to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMPARE_TAG }}
+      #     ignore-unchanged: true
+      #     only-severities: critical,high
+      #     write-comment: true
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      -
+        name: Scan local image # sprawdzenie czy obraz nie zawiera zagrożeń krytycznych
+        id: image-scan
+        run: | 
+            curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
+            docker login -u ${{ vars.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+            sh install-scout.sh
+            docker scout cves --exit-code --only-severity critical,high zad1:latest
+            echo "SCAN_RESULT=$?" >> "$GITHUB_ENV"
