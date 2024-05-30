@@ -15,7 +15,7 @@
 ![wynik s](https://github.com/erkjx/zadanie2/assets/129630909/cb40e458-c447-4c54-8fcb-f1acf5f892a9)
 
 **Omówienie dokonanych zmian przy dodawaniu skanowania Docker Scout:**  
-**Nazwa kroku:**  
+**Nazwa kroku:** 
  * name: Scan local image  
 **Uniklany identyfikator kroku:**  
   * id: image-scan  
