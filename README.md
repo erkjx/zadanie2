@@ -16,19 +16,19 @@
 
 **Omówienie dokonanych zmian przy dodawaniu skanowania Docker Scout:**  
 **Nazwa kroku:** 
- * name: Scan local image  
+    * name: Scan local image  
 **Uniklany identyfikator kroku:**  
-  * id: image-scan  
- Pobiera skrypt instalacyjny Docker Scout CLI z GitHub i zapisuje go jako install-scout.sh.  
-  * curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh  
+    * id: image-scan  
+ **Pobiera skrypt instalacyjny Docker Scout CLI z GitHub i zapisuje go jako install-scout.sh.**  
+    * curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh  
 **Logowanie do Docker Hub:**  
-  * docker login -u ${{ vars.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}  
+    * docker login -u ${{ vars.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}  
 **Instalacja Docker Scout:**  
-  * sh install-scout.sh  
+    * sh install-scout.sh  
 **Uruchamia skanowanie obrazu Docker o nazwie erkjx/zadanie2:zadanie2 w celu wykrycia luk bezpieczeństwa.  
 Opcje:**  
- * --exit-code ustawia kod wyjścia na wartość określającą wynik skanowania;  
- * --only-severity critical,high ogranicza skanowanie do krytycznych i wysokich zagrożeń;  
-  * docker scout cves --exit-code --only-severity critical,high erkjx/zadanie2:zadanie2  
+    * --exit-code ustawia kod wyjścia na wartość określającą wynik skanowania;  
+    * --only-severity critical,high ogranicza skanowanie do krytycznych i wysokich zagrożeń;  
+    * docker scout cves --exit-code --only-severity critical,high erkjx/zadanie2:zadanie2  
 **Zapisywanie wyniku skanowania:**  
-  * echo "SCAN_RESULT=$?" >> "$GITHUB_ENV"  
+    * echo "SCAN_RESULT=$?" >> "$GITHUB_ENV"  
