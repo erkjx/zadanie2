@@ -16,7 +16,7 @@
 
 **Omówienie dokonanych zmian przy dodawaniu skanowania Docker Scout:**  
 **Nazwa kroku:**  
-  * name: Scan local image  
+ * name: Scan local image  
 **Uniklany identyfikator kroku:**  
   * id: image-scan  
  Pobiera skrypt instalacyjny Docker Scout CLI z GitHub i zapisuje go jako install-scout.sh.  
