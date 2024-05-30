@@ -14,21 +14,21 @@
 ![skan4](https://github.com/erkjx/zadanie2/assets/129630909/15ed2c48-2ac3-4be5-8e55-41afe7754aec)
 ![wynik s](https://github.com/erkjx/zadanie2/assets/129630909/cb40e458-c447-4c54-8fcb-f1acf5f892a9)
 
-**Omówienie dokonanych zmian przy dodawaniu skanowania Docker Scout:**
-**Nazwa kroku:**
-  * name: Scan local image 
-**Uniklany identyfikator kroku:**
-  * id: image-scan
- Pobiera skrypt instalacyjny Docker Scout CLI z GitHub i zapisuje go jako install-scout.sh.
-  * curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
-**Logowanie do Docker Hub:**
-  * docker login -u ${{ vars.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-**Instalacja Docker Scout:**
-  * sh install-scout.sh
-**Uruchamia skanowanie obrazu Docker o nazwie erkjx/zadanie2:zadanie2 w celu wykrycia luk bezpieczeństwa.
-Opcje:**
- * --exit-code ustawia kod wyjścia na wartość określającą wynik skanowania;
- * --only-severity critical,high ogranicza skanowanie do krytycznych i wysokich zagrożeń.
-  * docker scout cves --exit-code --only-severity critical,high erkjx/zadanie2:zadanie2
-**Zapisywanie wyniku skanowania:**
-  * echo "SCAN_RESULT=$?" >> "$GITHUB_ENV"
+**Omówienie dokonanych zmian przy dodawaniu skanowania Docker Scout:**  
+**Nazwa kroku:**  
+  * name: Scan local image  
+**Uniklany identyfikator kroku:**  
+  * id: image-scan  
+ Pobiera skrypt instalacyjny Docker Scout CLI z GitHub i zapisuje go jako install-scout.sh.  
+  * curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh  
+**Logowanie do Docker Hub:**  
+  * docker login -u ${{ vars.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}  
+**Instalacja Docker Scout:**  
+  * sh install-scout.sh  
+**Uruchamia skanowanie obrazu Docker o nazwie erkjx/zadanie2:zadanie2 w celu wykrycia luk bezpieczeństwa.  
+Opcje:**  
+ * --exit-code ustawia kod wyjścia na wartość określającą wynik skanowania;  
+ * --only-severity critical,high ogranicza skanowanie do krytycznych i wysokich zagrożeń;  
+  * docker scout cves --exit-code --only-severity critical,high erkjx/zadanie2:zadanie2  
+**Zapisywanie wyniku skanowania:**  
+  * echo "SCAN_RESULT=$?" >> "$GITHUB_ENV"  
