@@ -1,3 +1,12 @@
+*****Treść zadania*****
+![image](https://github.com/erkjx/zadanie2/assets/129630909/e0d87c2a-98d2-4eb7-9707-c5abab478321)
+
+
+
+
+
+
+
 **Rezultat:**
 ![lab 8 do 6 slajd](https://github.com/erkjx/zadanie2/assets/129630909/94c6f7f9-1d23-4329-84dd-488088028f9f)
 ![lab8 7-9](https://github.com/erkjx/zadanie2/assets/129630909/b4bde868-a1dd-4844-afae-2cc00316a9ba)
